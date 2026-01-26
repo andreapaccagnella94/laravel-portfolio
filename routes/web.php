@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\DashboardController;
-use App\Http\Controllers\PostController;
+use App\Http\Controllers\Admin\ProjectController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -30,6 +30,7 @@ Route::middleware(["auth", "verified"])
 
 
 // il metodo resource ci crea in automatico tutte le rotte necessarie per la CRUD
-Route::resource("posts", PostController::class);
+Route::resource("projects", ProjectController::class)
+    ->middleware(['auth', 'verified']);
 
 require __DIR__ . '/auth.php';
