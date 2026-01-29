@@ -1,8 +1,12 @@
 @extends('layouts.app')
 
+@section('title', "Tutti i miei progetti")
+
 @section('content')
 
+
 <div class="container mt-4">
+    <a href="{{ route('projects.create') }}" class="btn btn-success my-4">Aggiungi un progetto</a>
     <table class="table table-striped table-hover">
         <thead class="table-dark">
             <tr>

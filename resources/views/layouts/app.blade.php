@@ -90,6 +90,11 @@
         </nav>
 
         <main class="">
+            <div class="container my-4 text-center">
+                <h1>
+                    @yield('title')
+                </h1>
+            </div>
             @yield('content')
         </main>
     </div>

@@ -23,7 +23,8 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        //
+        // semplicemente mi porta alla view del form per creare un nuovo progetto
+        return view("projects.create");
     }
 
     /**
@@ -31,7 +32,22 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+        // dd($data); dati presi dal form
+
+        // creo un instanza dal modello e la popolo con i dati arrivati dal form
+        $newProject = new Project();
+        // dd($newProject); // modello
+
+        $newProject->name = $data["name"];
+        $newProject->cliente = $data["cliente"];
+        $newProject->periodo = $data["periodo"];
+        $newProject->riassunto = $data["riassunto"];
+
+        $newProject->save();
+
+        // reindirizzo alla show del nuovo progetto creato e salvato nel db
+        return redirect()->route("projects.show", $newProject);
     }
 
     /**
