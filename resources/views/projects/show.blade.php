@@ -31,8 +31,8 @@
                         </div>
                     </div>
                     
-                    <div class="card-footer bg-light border-0 text-center py-3">
-                        <a href="#" class="btn btn-outline-primary btn-sm">Visualizza Dettagli Tecnici</a>
+                    <div class="card-footer bg-light border-0 text-center d-flex justify-content-between py-3">
+                        <a href="{{route("projects.edit", $project)}}" class="btn btn-outline-warning btn-sm">Modifica</a>
                         <a href="{{route("projects.index")}}" class="btn btn-outline-primary btn-sm">Torna ai progetti</a>
                     </div>
                 </div>

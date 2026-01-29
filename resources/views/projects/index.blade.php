@@ -22,9 +22,12 @@
                     <td>{{ $progetto->name }}</td>
                     <td>{{ $progetto->cliente }}</td>
                     <td>{{ $progetto->periodo }}</td>
-                    <td>
-                        <a href="{{ route("projects.show", $progetto) }}" class="btn btn-sm btn-primary">
+                    <td class="text-center">
+                        <a href="{{ route("projects.show", $progetto) }}" class="btn btn-sm btn-outline-primary">
                             Visualizza
+                        </a>
+                        <a href="{{ route('projects.edit', $progetto) }}" class="btn btn-outline-warning btn-sm">
+                            Modifica
                         </a>
                     </td>
                 </tr>
