@@ -22,18 +22,52 @@
                     <td>{{ $progetto->name }}</td>
                     <td>{{ $progetto->cliente }}</td>
                     <td>{{ $progetto->periodo }}</td>
-                    <td class="text-center">
-                        <a href="{{ route("projects.show", $progetto) }}" class="btn btn-sm btn-outline-primary">
+                    <td class="d-flex justify-content-center gap-2 text-center">
+                        <a href="{{ route("projects.show", $progetto) }}" class="btn btn-outline-primary">
                             Visualizza
                         </a>
-                        <a href="{{ route('projects.edit', $progetto) }}" class="btn btn-outline-warning btn-sm">
+                        <a href="{{ route('projects.edit', $progetto) }}" class="btn btn-outline-warning">
                             Modifica
                         </a>
+                        <!-- Button trigger modal -->
+                        <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#eliminaProgetto-{{ $progetto->id }}">
+                            Elimina
+                        </button>
+                        <!-- Modal -->
+                        <div class="modal fade" id="eliminaProgetto-{{ $progetto->id }}" tabindex="-1" aria-labelledby="eliminaProgettoLabel-{{ $progetto->id }}" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered"> {{-- mettere al centro il modale --}}
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h1 class="modal-title fs-5" id="eliminaProgettoLabel-{{ $progetto->id }}">Elimina il Progetto: {{ $progetto->name }}</h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        Vuoi eliminare il progetto "<strong>{{ $progetto->name }}</strong>"? Questa azione è definitiva.
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annulla</button>
+                                        <form action="{{ route('projects.destroy', $progetto->id) }}" method="POST">
+
+                                            @csrf
+
+                                            @method('DELETE')
+
+                                            <input type="submit" class="btn btn-danger" value="Elimina definitivamente">
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
                     </td>
                 </tr>
+                        
             @endforeach
         </tbody>
     </table>
 </div>
+
+
+
     
 @endsection
