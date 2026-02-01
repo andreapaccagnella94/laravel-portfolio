@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::table('projects', function (Blueprint $table) {
             // non devo rimuovere niente perchè prima non c'era questa colonna 
             // importante o definisco che valore avrà questa colonna o dico nullable
-            $table->foreignId("types_id")->nullable()->constrained();
+            $table->foreignId("type_id")->after("riassunto")->nullable()->constrained();
         });
     }
 
@@ -25,10 +25,10 @@ return new class extends Migration
     {
         Schema::table('projects', function (Blueprint $table) {
             // elimino prima la constrain
-            $table->dropForeign("types_id");
+            $table->dropForeign("projects_type_id_foreign");
 
             // elimino la colonna
-            $table->dropColumn("types_id");
+            $table->dropColumn("type_id");
         });
     }
 };
