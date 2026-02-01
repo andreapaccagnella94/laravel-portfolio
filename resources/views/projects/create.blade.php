@@ -6,7 +6,7 @@
 
 <div class="container mt-5">
     <h2>Aggiungi Nuovo Progetto</h2>
-
+    
     <form action="{{ route('projects.store') }}" method="POST">
 
         @csrf
@@ -24,6 +24,15 @@
         <div class="mb-3">
             <label for="periodo" class="form-label">Data Inizio Progetto</label>
             <input type="date" name="periodo" id="periodo" class="form-control" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="type_id" class="form-label">Tipo progetto</label>
+            <select name="type_id" id="type_id" class="form-control" required>
+                @foreach ($types as $type)
+                    <option value="{{$type->id}}">{{$type->name}}</option>
+                @endforeach
+            </select>
         </div>
 
         <div class="mb-3">

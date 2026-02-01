@@ -1,14 +1,13 @@
 @extends('layouts.app')
 
 @section('content')
-
     <div class="container">
         <div class="row justify-content-center mt-4">
             <div class="col-12 col-md-10 col-lg-8">
                 
                 <div class="card shadow-sm border-0 rounded-3">
                     <div class="card-header bg-white border-bottom-0 pt-4 pb-0 d-flex justify-content-between align-items-center">
-                        <span class="badge bg-primary text-white rounded-pill px-3 py-2">Laravel Project</span>
+                        <span class="badge bg-primary text-white rounded-pill px-3 py-2">{{$project->type->name}}</span>
                         <span class="text-muted small"><i class="fas fa-calendar-alt"></i> Inizio: {{$project->periodo}}</span>
                     </div>
                     
@@ -23,12 +22,12 @@
                             {{$project->riassunto}}
                         </p>
                         
-                        <div class="d-flex flex-wrap gap-2 mt-3">
+                        {{-- <div class="d-flex flex-wrap gap-2 mt-3">
                             <span class="badge bg-light text-dark border">PHP 8.3</span>
                             <span class="badge bg-light text-dark border">Laravel 11</span>
                             <span class="badge bg-light text-dark border">MySQL</span>
                             <span class="badge bg-light text-dark border">Boostrap CSS</span>
-                        </div>
+                        </div> --}}
                     </div>
                     
                     <div class="card-footer bg-light border-0 text-center d-flex justify-content-between py-3">

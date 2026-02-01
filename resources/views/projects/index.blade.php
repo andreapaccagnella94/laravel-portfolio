@@ -10,18 +10,20 @@
     <table class="table table-striped table-hover">
         <thead class="table-dark">
             <tr>
-                <th>Nome Progetto</th>
-                <th>Cliente</th>
-                <th>Data Inizio</th>
-                <th></th>
+                <th class="text-center">Nome Progetto</th>
+                <th class="text-center">Cliente</th>
+                <th class="text-center">Data Inizio</th>
+                <th class="text-center">Tipo progetto</th>
+                <th class="text-center"></th>
             </tr>
         </thead>
         <tbody>
             @foreach($projects as $project)
                 <tr>
-                    <td>{{ $project->name }}</td>
-                    <td>{{ $project->cliente }}</td>
-                    <td>{{ $project->periodo }}</td>
+                    <td class="text-center">{{ $project->name }}</td>
+                    <td class="text-center">{{ $project->cliente }}</td>
+                    <td class="text-center">{{ $project->periodo }}</td>
+                    <td class="text-center"><span class="badge bg-primary text-white rounded-pill px-3 py-2">{{$project->type->name}}</span></td>
                     <td class="d-flex justify-content-center gap-2 text-center">
                         <a href="{{ route("projects.show", $project) }}" class="btn btn-outline-primary">
                             Visualizza

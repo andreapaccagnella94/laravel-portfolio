@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Project;
+use App\Models\Type;
 use Illuminate\Http\Request;
 
 class ProjectController extends Controller
@@ -23,8 +24,10 @@ class ProjectController extends Controller
      */
     public function create()
     {
+        // devo passare i types da poter scegliere nel form 
+        $types = Type::all();
         // semplicemente mi porta alla view del form per creare un nuovo progetto
-        return view("projects.create");
+        return view("projects.create", compact("types"));
     }
 
     /**
@@ -43,6 +46,7 @@ class ProjectController extends Controller
         $newProject->cliente = $data["cliente"];
         $newProject->periodo = $data["periodo"];
         $newProject->riassunto = $data["riassunto"];
+        $newProject->type_id = $data["type_id"];
 
         $newProject->save();
 
@@ -63,8 +67,10 @@ class ProjectController extends Controller
      */
     public function edit(Project $project)
     {
+        // devo passare i types da poter scegliere nel form 
+        $types = Type::all();
         // semplicemente mi porta alla view del form per modificare un progetto passando il progetto specifico
-        return view("projects.edit", compact("project"));
+        return view("projects.edit", compact("project", "types"));
     }
 
     /**
@@ -82,6 +88,7 @@ class ProjectController extends Controller
         $project->cliente = $data["cliente"];
         $project->periodo = $data["periodo"];
         $project->riassunto = $data["riassunto"];
+        $project->type_id = $data["type_id"];
         // dd($project->riassunto);
 
         $project->update(); // non salvo una nuova instanza ma modifico una già esistente
