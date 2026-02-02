@@ -4,48 +4,29 @@
 
 @section('content')
 
-{{-- @dd($project) perifico cosa mi sono passato dal metodo edit--}}
+{{-- @dd($type)  --}}{{-- verifico cosa mi sono passato dal metodo edit --}}
 
 <div class="container mt-5">
-    <h2>Modifca Questo Progetto</h2>
+    <h2>Modifca Questo Tipo Progetto</h2>
 
-    <form action="{{ route('projects.update', $project) }}" method="POST">
+    <form action="{{ route('types.update', $type) }}" method="POST">
         
         @csrf
 
         @method("PUT")
 
         <div class="mb-3">
-            <label for="name" class="form-label">Nome Progetto</label>
-            <input type="text" name="name" id="name" class="form-control" value="{{$project->name}}" required>
+            <label for="name" class="form-label">Nome Tipo Progetto</label>
+            <input type="text" name="name" id="name" class="form-control" value="{{$type->name}}" required>
         </div>
 
         <div class="mb-3">
-            <label for="cliente" class="form-label">Cliente</label>
-            <input type="text" name="cliente" id="cliente" class="form-control" value="{{$project->cliente}}" required>
-        </div>
-
-        <div class="mb-3">
-            <label for="periodo" class="form-label">Data Inizio Progetto</label>
-            <input type="date" name="periodo" id="periodo" class="form-control" value="{{$project->periodo}}" required>
-        </div>
-
-        <div class="mb-3">
-            <label for="type_id" class="form-label">Tipo progetto</label>
-            <select name="type_id" id="type_id" class="form-control" required>
-                @foreach ($types as $type)
-                    <option value="{{$type->id}}" {{ $project->type_id == $type->id ? "selected" : ""}} >{{$type->name}}</option>
-                @endforeach
-            </select>
-        </div>
-
-        <div class="mb-3">
-            <label for="riassunto" class="form-label">Riassunto / Descrizione</label>
-            <textarea name="riassunto" id="riassunto" class="form-control" rows="4" required>{{$project->name}}</textarea>
+            <label for="description" class="form-label">Descrizione</label>
+            <textarea name="description" id="description" class="form-control" rows="4" required>{{$type->description}}</textarea>
         </div>
 
         <button type="submit" class="btn btn-success">Salva Modifica</button>
-        <a href="{{ route('projects.show', $project) }}" class="btn btn-secondary">Annulla Modifica</a>
+        <a href="{{ route('types.show', $type) }}" class="btn btn-secondary">Annulla Modifica</a>
     </form>
 </div>
     

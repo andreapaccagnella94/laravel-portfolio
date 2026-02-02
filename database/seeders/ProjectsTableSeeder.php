@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Project;
+use App\Models\Type;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -16,8 +17,10 @@ class ProjectsTableSeeder extends Seeder
      */
     public function run(Faker $faker): void
     {
+        // prendo tutti i tipi
+        $types = Type::all();
 
-        for ($i = 0; $i < 5; $i++) {
+        for ($i = 0; $i < 20; $i++) {
 
             $newProject = new Project();
 
@@ -25,7 +28,7 @@ class ProjectsTableSeeder extends Seeder
             $newProject->cliente = $faker->company();
             $newProject->periodo = $faker->dateTime();
             $newProject->riassunto = $faker->paragraph(6);
-            $newProject->type_id = rand(1, 8);
+            $newProject->type_id = $types->pluck("id")->random();
 
             $newProject->save();
         }
