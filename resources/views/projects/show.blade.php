@@ -22,12 +22,13 @@
                             {{$project->riassunto}}
                         </p>
                         
-                        {{-- <div class="d-flex flex-wrap gap-2 mt-3">
-                            <span class="badge bg-light text-dark border">PHP 8.3</span>
-                            <span class="badge bg-light text-dark border">Laravel 11</span>
-                            <span class="badge bg-light text-dark border">MySQL</span>
-                            <span class="badge bg-light text-dark border">Boostrap CSS</span>
-                        </div> --}}
+                        @if (count($project->technologies) > 0)
+                        <div class="d-flex flex-wrap gap-2 mt-3">
+                            @foreach ($project->technologies as $technology)
+                                <span class="badge border" style="background-color: {{$technology->color}}" >{{$technology->name}}</span>
+                            @endforeach
+                        </div>
+                        @endif
                     </div>
                     
                     <div class="card-footer bg-light border-0 text-center d-flex justify-content-between py-3">

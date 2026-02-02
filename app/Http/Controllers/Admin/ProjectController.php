@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Project;
+use App\Models\Technology;
 use App\Models\Type;
 use Illuminate\Http\Request;
 
@@ -26,8 +27,12 @@ class ProjectController extends Controller
     {
         // devo passare i types da poter scegliere nel form 
         $types = Type::all();
+
+        // devo passare le Technologies per fare le checkbox
+        $technologies = Technology::all();
+
         // semplicemente mi porta alla view del form per creare un nuovo progetto
-        return view("projects.create", compact("types"));
+        return view("projects.create", compact("types", "technologies"));
     }
 
     /**
@@ -49,6 +54,13 @@ class ProjectController extends Controller
         $newProject->type_id = $data["type_id"];
 
         $newProject->save();
+
+        // DOPO AVER SALVATO IL PROJECT
+        // controllo se abbiamo ricevuto delle technologies
+        if ($request->has("technologies")) {
+            // devo passargli la relazione con tags() non una collezione (che sarebbe senza parentesi)
+            $newProject->technologies()->attach($data["technologies"]);
+        }
 
         // reindirizzo alla show del nuovo progetto creato e salvato nel db
         return redirect()->route("projects.show", $newProject);
