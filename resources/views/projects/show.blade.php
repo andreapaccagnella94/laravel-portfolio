@@ -25,7 +25,9 @@
                         @if (count($project->technologies) > 0)
                         <div class="d-flex flex-wrap gap-2 mt-3">
                             @foreach ($project->technologies as $technology)
-                                <span class="badge border" style="background-color: {{$technology->color}}" >{{$technology->name}}</span>
+                                <a href="{{route ("technologies.show", $technology->id)}}">
+                                    <span class="badge border" style="background-color: {{$technology->color}}" >{{$technology->name}}</span>
+                                </a>
                             @endforeach
                         </div>
                         @endif

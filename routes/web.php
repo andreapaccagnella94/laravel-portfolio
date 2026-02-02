@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ProjectController;
+use App\Http\Controllers\Admin\TechnologyController;
 use App\Http\Controllers\Admin\TypeController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -36,6 +37,9 @@ Route::resource("projects", ProjectController::class)
 
 // il metodo resource ci crea in automatico tutte le rotte necessarie per la CRUD
 Route::resource("types", TypeController::class)
+    ->middleware(['auth', 'verified']);
+
+Route::resource("technologies", TechnologyController::class)
     ->middleware(['auth', 'verified']);
 
 require __DIR__ . '/auth.php';
