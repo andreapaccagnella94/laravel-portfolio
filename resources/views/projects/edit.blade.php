@@ -30,6 +30,7 @@
             <input type="date" name="periodo" id="periodo" class="form-control" value="{{$project->periodo}}" required>
         </div>
 
+        {{-- types --}}
         <div class="mb-3">
             <label for="type_id" class="form-label">Tipo progetto</label>
             <select name="type_id" id="type_id" class="form-control" required>
@@ -37,6 +38,16 @@
                     <option value="{{$type->id}}" {{ $project->type_id == $type->id ? "selected" : ""}} >{{$type->name}}</option>
                 @endforeach
             </select>
+        </div>
+
+        {{-- technologies --}}
+         <div class="mb-3 form-control d-flex flex-wrap">
+            @foreach ($technologies as $technology)
+            <div class="technology me-3">
+                <input type="checkbox" name="technologies[]" value="{{$technology->id}}" id="technology-{{$technology->id}}" {{$project->technologies->contains($technology->id) ? "checked" : ""}} >
+                <label for="technology-{{$technology->id}}" class="form-label">{{$technology->name}}</label>
+            </div>
+            @endforeach
         </div>
 
         <div class="mb-3">

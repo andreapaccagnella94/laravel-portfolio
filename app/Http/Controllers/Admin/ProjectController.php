@@ -58,7 +58,7 @@ class ProjectController extends Controller
         // DOPO AVER SALVATO IL PROJECT
         // controllo se abbiamo ricevuto delle technologies
         if ($request->has("technologies")) {
-            // devo passargli la relazione con tags() non una collezione (che sarebbe senza parentesi)
+            // devo passargli la relazione con technologies() non una collezione (che sarebbe senza parentesi)
             $newProject->technologies()->attach($data["technologies"]);
         }
 
@@ -81,8 +81,12 @@ class ProjectController extends Controller
     {
         // devo passare i types da poter scegliere nel form 
         $types = Type::all();
+
+        // devo passare le Technologies per fare le checkbox
+        $technologies = Technology::all();
+
         // semplicemente mi porta alla view del form per modificare un progetto passando il progetto specifico
-        return view("projects.edit", compact("project", "types"));
+        return view("projects.edit", compact("project", "types", "technologies"));
     }
 
     /**
@@ -104,6 +108,16 @@ class ProjectController extends Controller
         // dd($project->riassunto);
 
         $project->update(); // non salvo una nuova instanza ma modifico una già esistente
+
+        // DOPO CHE ABBIAMO AGGIORNATO
+        // dobbiamo sincronizzare i dati con la tabella pivot
+        if ($request->has("technologies")) {
+            // devo passargli la relazione con technologies() non una collezione (che sarebbe senza parentesi)
+            $project->technologies()->sync($data["technologies"]);
+        } else {
+            // se non ricevo delle technologies allora elimino tutte che c'erano prima dalla tabella pivot
+            $project->technologies()->detach();
+        }
 
         // vado a vedere tramite la show quello appena creato con il reindirizzamento
         return redirect()->route("projects.show", $project);
