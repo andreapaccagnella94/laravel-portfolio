@@ -20,6 +20,7 @@
         <tbody>
             @foreach($projects as $project)
                 <tr>
+                    @dd($project->type)
                     <td class="text-center">{{ $project->name }}</td>
                     <td class="text-center">{{ $project->cliente }}</td>
                     <td class="text-center">{{ $project->periodo }}</td>
